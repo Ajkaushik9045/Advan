@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../requests/provider/request_provider.dart';
 import '../../requests/models/item_model.dart';
+import '../../../core/utils/enums.dart';
 
 class ReceiverRequestDetailsPage extends StatefulWidget {
   final dynamic request;
 
-  const ReceiverRequestDetailsPage({Key? key, required this.request})
-    : super(key: key);
+  const ReceiverRequestDetailsPage({super.key, required this.request});
 
   @override
   State<ReceiverRequestDetailsPage> createState() =>
@@ -277,26 +277,23 @@ class _ReceiverRequestDetailsPageState
     );
   }
 
-  Widget _buildStatusChip(String status) {
+  Widget _buildStatusChip(RequestStatus status) {
     Color color;
     String label;
 
-    switch (status.toLowerCase()) {
-      case 'pending':
+    switch (status) {
+      case RequestStatus.pending:
         color = Colors.orange;
         label = 'Pending';
         break;
-      case 'confirmed':
+      case RequestStatus.confirmed:
         color = Colors.green;
         label = 'Confirmed';
         break;
-      case 'partially_fulfilled':
+      case RequestStatus.partiallyFulfilled:
         color = Colors.blue;
         label = 'Partially Fulfilled';
         break;
-      default:
-        color = Colors.grey;
-        label = status;
     }
 
     return Container(
@@ -411,7 +408,12 @@ class _ReceiverRequestDetailsPageState
       );
 
       final itemConfirmations = _itemConfirmations.entries
-          .map((entry) => {'itemId': entry.key, 'status': entry.value.name})
+          .map(
+            (entry) => {
+              'itemId': entry.key,
+              'available': entry.value == ItemStatus.confirmed,
+            },
+          )
           .toList();
 
       await requestProvider.confirmItems(

@@ -63,7 +63,7 @@ class RequestService {
       // itemConfirmations: [{ itemId: string, available: bool }]
       for (final c in itemConfirmations) {
         await apiClient.patch(
-          '/api/receiver/requests/' + requestId + '/items/' + c['itemId'],
+          '/api/receiver/requests/$requestId/items/' + c['itemId'],
           data: {'available': c['available'] == true},
         );
       }

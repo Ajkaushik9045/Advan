@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class RequestDetailsPage extends StatelessWidget {
   final dynamic request;
 
-  const RequestDetailsPage({Key? key, required this.request}) : super(key: key);
+  const RequestDetailsPage({super.key, required this.request});
 
   @override
   Widget build(BuildContext context) {

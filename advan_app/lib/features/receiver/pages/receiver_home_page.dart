@@ -6,7 +6,7 @@ import '../../requests/provider/request_provider.dart';
 import '../../requests/pages/receiver_request_details_page.dart';
 
 class ReceiverHomePage extends StatefulWidget {
-  const ReceiverHomePage({Key? key}) : super(key: key);
+  const ReceiverHomePage({super.key});
 
   @override
   State<ReceiverHomePage> createState() => _ReceiverHomePageState();
@@ -152,10 +152,10 @@ class ReceiverRequestCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const ReceiverRequestCard({
-    Key? key,
+    super.key,
     required this.request,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

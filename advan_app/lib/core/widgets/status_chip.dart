@@ -7,11 +7,11 @@ class StatusChip extends StatelessWidget {
   final double fontSize;
 
   const StatusChip({
-    Key? key,
+    super.key,
     required this.status,
     this.isItemStatus = false,
     this.fontSize = 12,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

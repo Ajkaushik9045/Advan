@@ -6,7 +6,7 @@ import '../../requests/provider/request_provider.dart';
 import '../models/item_model.dart';
 
 class CreateRequestPage extends StatefulWidget {
-  const CreateRequestPage({Key? key}) : super(key: key);
+  const CreateRequestPage({super.key});
 
   @override
   State<CreateRequestPage> createState() => _CreateRequestPageState();
@@ -191,8 +191,7 @@ class AvailableItemCard extends StatelessWidget {
   final Item item;
   final VoidCallback onAdd;
 
-  const AvailableItemCard({Key? key, required this.item, required this.onAdd})
-    : super(key: key);
+  const AvailableItemCard({super.key, required this.item, required this.onAdd});
 
   @override
   Widget build(BuildContext context) {
@@ -213,11 +212,11 @@ class SelectedItemCard extends StatelessWidget {
   final VoidCallback onRemove;
 
   const SelectedItemCard({
-    Key? key,
+    super.key,
     required this.item,
     required this.onQuantityChanged,
     required this.onRemove,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

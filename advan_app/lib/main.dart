@@ -11,17 +11,19 @@ import 'config/app_router.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  String baseUrl = 'http://10.0.2.2:3000';
+  String wsUrl = 'ws://10.0.2.2:3000';
+
   try {
     // Load .env from project root
     await dotenv.load(fileName: ".env");
+    // Only access dotenv.env after successful loading
+    baseUrl = dotenv.env['API_BASE_URL'] ?? 'http://10.0.2.2:3000';
+    wsUrl = dotenv.env['WS_URL'] ?? 'ws://10.0.2.2:3000';
   } catch (e) {
     // If .env file doesn't exist, use defaults
     print('Warning: .env file not found, using default configuration');
   }
-
-  // Default to Android emulator host if not provided
-  final baseUrl = dotenv.env['API_BASE_URL'] ?? 'http://10.0.2.2:3000';
-  final wsUrl = dotenv.env['WS_URL'] ?? 'ws://10.0.2.2:3000';
 
   final apiClient = ApiClient(baseUrl: baseUrl);
 

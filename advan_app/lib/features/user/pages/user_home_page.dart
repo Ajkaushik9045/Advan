@@ -5,9 +5,10 @@ import '../../auth/provider/auth_provider.dart';
 import '../../requests/provider/request_provider.dart';
 import '../../requests/pages/create_request_page.dart';
 import '../../requests/pages/request_details_page.dart';
+import '../../../core/utils/enums.dart';
 
 class UserHomePage extends StatefulWidget {
-  const UserHomePage({Key? key}) : super(key: key);
+  const UserHomePage({super.key});
 
   @override
   State<UserHomePage> createState() => _UserHomePageState();
@@ -119,7 +120,7 @@ class _UserHomePageState extends State<UserHomePage> {
             onRefresh: () async {
               final auth = Provider.of<AuthProvider>(context, listen: false);
               await requestProvider.fetchRequests(
-                  receiverId: 'user-${auth.role?.name ?? 'endUser'}',
+                receiverId: 'user-${auth.role?.name ?? 'endUser'}',
               );
             },
             child: ListView.builder(
@@ -161,8 +162,7 @@ class RequestCard extends StatelessWidget {
   final dynamic request;
   final VoidCallback onTap;
 
-  const RequestCard({Key? key, required this.request, required this.onTap})
-    : super(key: key);
+  const RequestCard({super.key, required this.request, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -221,26 +221,23 @@ class RequestCard extends StatelessWidget {
     );
   }
 
-  Widget _buildStatusChip(String status) {
+  Widget _buildStatusChip(RequestStatus status) {
     Color color;
     String label;
 
-    switch (status.toLowerCase()) {
-      case 'pending':
+    switch (status) {
+      case RequestStatus.pending:
         color = Colors.orange;
         label = 'Pending';
         break;
-      case 'confirmed':
+      case RequestStatus.confirmed:
         color = Colors.green;
         label = 'Confirmed';
         break;
-      case 'partially_fulfilled':
+      case RequestStatus.partiallyFulfilled:
         color = Colors.blue;
         label = 'Partially Fulfilled';
         break;
-      default:
-        color = Colors.grey;
-        label = status;
     }
 
     return Container(

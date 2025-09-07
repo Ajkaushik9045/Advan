@@ -18,7 +18,7 @@ class ApiClient {
       InterceptorsWrapper(
         onRequest: (options, handler) {
           if (_authToken != null && _authToken!.isNotEmpty) {
-            options.headers['Authorization'] = 'Bearer ' + _authToken!;
+            options.headers['Authorization'] = 'Bearer ${_authToken!}';
           }
           handler.next(options);
         },
