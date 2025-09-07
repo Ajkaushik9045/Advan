@@ -6,6 +6,7 @@ import { errorHandler } from "./middleware/errorHandler.middleware.js";
 import authRoutes from "./routes/auth.routes.js";
 import itemsRouter from "./routes/items.routes.js";
 import requestRouter from "./routes/requests.routes.js";
+import receiverRouter from "./routes/receiver.routes.js";
 
 const app = express();
 
@@ -17,8 +18,9 @@ if (process.env.NODE_ENV === "development") app.use(morgan("dev"));
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/items",itemsRouter);
-app.use('/api/request', requestRouter)
+app.use("/api/items", itemsRouter);
+app.use("/api/requests", requestRouter);
+app.use("/api/receiver", receiverRouter);
 
 // Error handler
 app.use(errorHandler);

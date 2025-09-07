@@ -69,3 +69,25 @@ export const login = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+/**
+ * @desc Get current authenticated user
+ * @route GET /api/auth/me
+ */
+export const me = catchAsync(async (req, res, next) => {
+  if (!req.user) return next(createError(401, MESSAGES.UNAUTHORIZED));
+
+  const user = await User.findById(req.user._id);
+  if (!user) return next(createError(401, MESSAGES.UNAUTHORIZED));
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      id: user._id,
+      userName: user.userName,
+      email: user.email,
+      role: user.role,
+      isActive: user.isActive,
+    },
+  });
+});
